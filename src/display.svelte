@@ -1,9 +1,8 @@
-
 <script>
 
   import { oven } from './stores.js';
-	import { onInterval } from './utils.js';
-	export let power_plugged;
+  import { onInterval } from './utils.js';
+  export let power_plugged;
   export let idle_mode;
   export let heating_enabled;
   export let display_generic_notification;
@@ -11,7 +10,7 @@
 
   let date_string = formatTime();
 
-	onInterval(() => { date_string = formatTime(); }, 5000);
+  onInterval(() => { date_string = formatTime(); }, 5000);
 
   // seconds to minutes and seconds
   function secsToMinsAndSecs(secs) {
@@ -32,7 +31,6 @@
 </script>
 
 <div id="display">
-
 {#if power_plugged}
   {#if display_generic_notification}
     <div class="adjusting">
@@ -71,9 +69,7 @@
     {/if}
   {/if}
 {/if}
-
 </div>
-
 
 <style>
   #display {
