@@ -35,6 +35,12 @@
     src: ['beep.wav']
   });
 
+  function play_beep_sound() {
+    if(power_plugged) {
+      beep_sound.play();
+    }
+  }
+
   function powerOnSequence() {
     stopHeating();
     oven.reset();
@@ -66,7 +72,7 @@
 
   function startStopHandler() {
     if(!power_plugged) { return }
-    beep_sound.play();
+    play_beep_sound();
     if(hatch_open) {
       displayNotification("Sulje luukku!", 3000);
       return;
@@ -95,7 +101,7 @@
   }
 
   function mouseDownDecrementHandler() {
-    beep_sound.play();
+    play_beep_sound();
     clearTimeout(display_timer_id);
     display_idle_mode = false;
     display_generic_notification = false;
@@ -104,7 +110,7 @@
   }
 
   function mouseDownIncrementHandler() {
-    beep_sound.play();
+    play_beep_sound();
     clearTimeout(display_timer_id);
     display_idle_mode = false;
     display_generic_notification = false;
@@ -159,7 +165,7 @@
       on:click={oven.switch_adjustment}
       on:click={setDisplayIdleModeCounter}
       on:click={() => display_generic_notification = false}
-      on:click={() => beep_sound.play()}
+      on:click={() => play_beep_sound()}
     >
         aika<br>teho
     </div>
