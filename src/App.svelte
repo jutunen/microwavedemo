@@ -109,6 +109,12 @@
     longPressTimerIds.push(setTimeout(startExtraLongPressDecrementAction, extraLongPressThreshold));
   }
 
+  function touchDownDecrementHandler(event) {
+    event.preventDefault();
+    $oven.adjust_time ? oven.t_decrement() : oven.p_decrement();
+    mouseDownDecrementHandler();
+  }
+
   function mouseDownIncrementHandler() {
     play_beep_sound();
     clearTimeout(display_timer_id);
@@ -116,6 +122,12 @@
     display_generic_notification = false;
     longPressTimerIds.push(setTimeout(startLongPressIncrementAction, longPressThreshold));
     longPressTimerIds.push(setTimeout(startExtraLongPressIncrementAction, extraLongPressThreshold));
+  }
+
+  function touchDownIncrementHandler(event) {
+    event.preventDefault();
+    $oven.adjust_time ? oven.t_increment() : oven.p_increment();
+    mouseDownIncrementHandler();
   }
 
   function mouseUpEventHandler () {
@@ -176,6 +188,9 @@
       on:click={setDisplayIdleModeCounter}
       on:mousedown={mouseDownDecrementHandler}
       on:mouseup={mouseUpEventHandler}
+      on:touchstart={e => touchDownDecrementHandler(e)}
+      on:touchend={mouseUpEventHandler}
+      on:touchcancel={mouseUpEventHandler}
     >
         -
     </div>
@@ -186,6 +201,9 @@
       on:click={setDisplayIdleModeCounter}
       on:mousedown={mouseDownIncrementHandler}
       on:mouseup={mouseUpEventHandler}
+      on:touchstart={e => touchDownIncrementHandler(e)}
+      on:touchend={mouseUpEventHandler}
+      on:touchcancel={mouseUpEventHandler}
     >
         +
     </div>
